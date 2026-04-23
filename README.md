@@ -1,51 +1,126 @@
-# Welcome to your Expo app 👋
+# Task Manager App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicação mobile desenvolvida com React Native utilizando Expo, com o objetivo de gerenciar tarefas de forma simples e eficiente. O usuário pode criar, editar, excluir e marcar tarefas como concluídas, além de filtrá-las por prioridade e status.
 
-## Get started
+---
 
-1. Install dependencies
+## Funcionalidades
 
-   ```bash
-   npm install
-   ```
+- Criação de tarefas com título, descrição e prioridade  
+- Edição de tarefas existentes  
+- Exclusão de tarefas com gesto de swipe  
+- Marcação de tarefas como concluídas  
+- Alternância entre tarefas concluídas e pendentes  
+- Filtro por prioridade (Alta, Média, Baixa)  
+- Filtro por status (Todas ou Concluídas)  
+- Feedback visual com toasts para ações do usuário  
+- Interface responsiva e organizada  
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## Estrutura do Projeto
 
-In the output, you'll find options to open the app in a
+O projeto segue uma organização baseada em separação de responsabilidades:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+components/
+├── CRUD/
+├── general/
+services/
+types/
+app/
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+- `components/` → Componentes reutilizáveis  
+- `components/CRUD/` → Componentes utilizados para o projeto  
+- `services/` → Comunicação com API (Axios)  
+- `types/` → Tipagens globais  
+- `app/` → Telas usando Expo Router  
 
-When you're ready, run:
+---
+
+## Tecnologias Utilizadas
+
+- React Native  
+- Expo  
+- TypeScript  
+- Expo Router  
+- Axios  
+- Zod  
+- React Native Gesture Handler  
+- React Native Reanimated  
+
+---
+
+## API
+
+A aplicação consome a seguinte API:
+
+https://crud-pdhc-node.vercel.app/tasks
+
+
+---
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+- Node.js instalado  
+- Expo CLI (opcional):
 
 ```bash
-npm run reset-project
+npm install -g expo-cli
 ```
+Instalação
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Clone o repositório:
+```bash
+git clone <url-do-repositorio>
+```
+Acesse a pasta:
+```bash
+cd <nome-do-projeto>
+```
+Instale as dependências:
+```bash
+npm install
+```
+Executando com Expo
+```bash
+npx expo start
+```
+Como testar o aplicativo
 
-## Learn more
+Após rodar o comando acima, você pode testar de três formas:
 
-To learn more about developing your project with Expo, look at the following resources:
+1. Dispositivo físico
+- Instale o app Expo Go
+- Escaneie o QR Code exibido no terminal ou navegador
+2. Emulador Android
+- Tenha o Android Studio configurado
+- Inicie um emulador
+Pressione:
+```bash
+a
+```
+3. Simulador iOS (macOS)
+- Tenha o Xcode instalado
+- Pressione:
+```bash
+i
+```
+Fluxo da aplicação
+O usuário acessa a lista de tarefas
+Pode criar uma nova tarefa
+Cada tarefa permite:
+Edição ao clicar
+Exclusão com swipe para a esquerda
+Conclusão com swipe para a direita
+Tarefas concluídas são separadas visualmente
+Filtros permitem refinar a lista
+Validações
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Validações feitas com Zod:
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-"# CRUD-PDHC-RN" 
+Título obrigatório (máx. 20 caracteres)
+Descrição obrigatória (máx. 100 caracteres)
+Prioridade obrigatória
