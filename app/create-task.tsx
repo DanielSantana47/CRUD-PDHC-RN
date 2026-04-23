@@ -5,15 +5,11 @@ import { createTask } from "@/services/taskService";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
-import {
-    Pressable,
-    Text,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CreateTask() {
+
     const [form, setForm] = useState({
         title: "",
         description: "",
@@ -40,13 +36,16 @@ export default function CreateTask() {
 
     return (
         <SafeAreaView className="flex-1 p-6 gap-6">
+
             <View className="flex-row justify-between">
-                <Pressable onPress={()=> router.navigate('/')}>
+                <Pressable onPress={() => router.navigate('/')}>
                     <Ionicons name="arrow-back" size={24} color="black" />
                 </Pressable>
+
                 <Text className="text-2xl font-bold">
                     Nova Tarefa
                 </Text>
+
                 <View className="w-[24px]"></View>
             </View>
 
@@ -67,6 +66,8 @@ export default function CreateTask() {
                 }
                 error={errors.description?.[0]}
             />
+
+            <Text className="text-xl font-semibold text-center">Defina a Prioridade da tarefa</Text>
 
             <View className="flex-row justify-around gap-6">
                 <PriorityButton
@@ -97,14 +98,14 @@ export default function CreateTask() {
                 />
             </View>
 
-            <TouchableOpacity
+            <Pressable
                 className="bg-sky-600 p-4 rounded-full"
                 onPress={handleSubmit}
             >
                 <Text className="text-white text-center font-bold">
                     Criar tarefa
                 </Text>
-            </TouchableOpacity>
+            </Pressable>
 
         </SafeAreaView>
     );

@@ -1,32 +1,21 @@
+import { TaskCardProps } from "@/types/TaskCard";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
-type Priority = "HIGH" | "MEDIUM" | "LOW";
-type Status = "TODO" | "DONE";
-
-type TaskCardProps = {
-    id: number;
-    title: string;
-    description: string;
-    date: string;
-    priority: Priority;
-    status: Status;
-    onDelete: (id: number) => void;
-    onDone: (id: number) => void;
-};
-
 export function TaskCard({
     id,
     title,
     description,
-    date,
+    dateOfCreation,
     priority,
     status,
     onDelete,
     onDone
 }: TaskCardProps) {
+
+    const formattedDate = new Date(dateOfCreation).toLocaleDateString();
 
     const handlePress = () => {
         router.push({
@@ -80,7 +69,6 @@ export function TaskCard({
         }
     };
 
-    // 👉 Swipe direita (DONE)
     const renderLeftActions = () => (
         <View className="flex-1 justify-center pl-6 bg-green-200 rounded-2xl mb-4">
             <View className="w-12 h-12 rounded-full bg-green-500 items-center justify-center">
@@ -89,7 +77,6 @@ export function TaskCard({
         </View>
     );
 
-    // 👉 Swipe esquerda (DELETE)
     const renderRightActions = () => (
         <View className="flex-1 justify-center items-end pr-6 bg-red-200 rounded-2xl mb-4">
             <View className="w-12 h-12 rounded-full bg-red-500 items-center justify-center">
@@ -122,7 +109,7 @@ export function TaskCard({
                                 {title}
                             </Text>
                             <Text className="text-white/80">
-                                Criada em {date}
+                                Criada em {formattedDate}
                             </Text>
                         </View>
 

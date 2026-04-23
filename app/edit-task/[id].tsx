@@ -1,18 +1,12 @@
 import { ActionButton } from "@/components/CRUD/ActionButton";
 import { FormInput } from "@/components/CRUD/formInput";
 import { PriorityButton } from "@/components/CRUD/priorityButton";
+import { InputSchema } from "@/libs/schema/input";
 import { deleteTask, getTasks, updateTask } from "@/services/taskService";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { z } from "zod";
-
-const schema = z.object({
-    title: z.string().min(1).max(20),
-    description: z.string().min(1).max(100),
-    priority: z.enum(["HIGH", "MEDIUM", "LOW"])
-});
 
 export default function EditTask() {
     const { id } = useLocalSearchParams();
@@ -47,7 +41,7 @@ export default function EditTask() {
     }, []);
 
     const handleSubmit = async () => {
-        const result = schema.safeParse(form);
+        const result = InputSchema.safeParse(form);
 
         if (!result.success) {
             setErrors(result.error.flatten().fieldErrors);
@@ -108,6 +102,8 @@ export default function EditTask() {
                 error={errors.description?.[0]}
             />
 
+            <Text className="text-xl font-semibold text-center">Defina a Prioridade da tarefa</Text>
+
             <View className="flex-row justify-around gap-6">
                 <PriorityButton
                     label="Alta"
@@ -135,14 +131,12 @@ export default function EditTask() {
                 />
             </View>
 
-            {/* ATUALIZAR */}
             <ActionButton
                 label="Atualizar tarefa"
                 onPress={handleSubmit}
                 color="bg-sky-600"
             />
 
-            {/* TOGGLE STATUS */}
             <ActionButton
                 label={
                     status === "DONE"
@@ -153,7 +147,6 @@ export default function EditTask() {
                 color={status === "DONE" ? "bg-yellow-600" : "bg-green-600"}
             />
 
-            {/* DELETAR */}
             <ActionButton
                 label="Deletar tarefa"
                 onPress={handleDelete}
